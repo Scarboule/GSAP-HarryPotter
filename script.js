@@ -6,18 +6,25 @@ let letterText = document.getElementById("letter-text");
 /*let letters = letterText.innerText.split("");
 letterText.innerText = ""; */
 let letters = letterText.innerText.split("");
+
+let n = letterText.innerText.length;
+console.log(n);
+
 letterText.innerHTML = letters.map(
     letter => letter === " " ? "&nbsp;" : (letter === "\n" ? "<br>" : `<span class="letter">${letter}</span>`)
     ).join("");
 
-letters.forEach(function(letter) {
-    let span = document.createElement("span");
-    span.className = "letter";
-    span.innerText = letter;
-    letterText.appendChild(span);
-});
+while(i = 0, i < n, i++){
+    letters.forEach(function(letter) {
+        let span = document.createElement("span");
+        span.className = "letter";
+        span.innerText = letter;
+        letterText.appendChild(span);
+    });
+}
 
-// Animation 
+
+// Animation s
 let letterSpans = document.querySelectorAll(".letter");
 
 
@@ -42,12 +49,40 @@ timeline.fromTo(letterSpans,
         rotation: 0,
         x: 0,
         y: 0,
-        duration: 0.1,
+        duration: 0.5,
         stagger: 0.1,
         ease: "power2.inOut",
         fontSize: "32px"
     }
 );
+
+gsap.to('.signature', {duration: 5, strokeDashoffset: 0, ease: 'power2.inOut', stagger: 0.1});
+
+let seal = document.getElementById("seal");
+
+timeline.fromTo(seal,
+    {
+        opacity: 0,
+        scale: 0,
+        rotation: -180,
+        x: 0,
+        y: 0
+    },
+    {
+        opacity: 1,///
+        scale: 1,
+        rotation: 0,
+        x: 0,
+        y: 0,
+        duration: 1,
+        ease: "elastic.out(1, 0.75)",
+        width: "200px",
+        bottom: "50px",
+        right: "50px"
+    }
+);
+
+
 
 
 

@@ -16,10 +16,9 @@
     background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
-  }
-  
-  /* Style pour le texte de la lettre */
-  #letter-text {
+}
+
+#letter-text {
     
     width: 80%;
     height: 80%;
@@ -32,9 +31,27 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-  .letter{
-  display: inline-block;
-  white-space: pre;
-  }
-  
+}
+.letter{
+    display: inline-block;
+    white-space: pre;
+}
+.img-container{
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+}
+.signature-container{
+    position: absolute;
+    bottom: 42px;
+    right: 15%;
+}
+.signature {
+    stroke-dasharray: 2000; 
+    stroke-dashoffset: 2000; 
+    stroke-linejoin: round;
+    stroke-linecap: round; 
+    fill: none; 
+    stroke-width: 2; 
+    stroke: #000; 
+}
