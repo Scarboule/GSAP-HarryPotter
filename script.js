@@ -1,37 +1,51 @@
-const empreintePas = document.getElementById("empreinte");
+// Configuration de GSAP
+// Création d'une timeline pour l'animation
+let timeline = gsap.timeline();
 
-    // Définissez l'animation GSAP
-    const tl = gsap.timeline({ repeat: -1 });
+// Définition de l'élément cible pour l'animation
+let letterText = document.getElementById("letter-text");
 
-    // Utilisez GSAP pour animer l'empreinte de pas
-    tl.to(empreintePas, { duration: 0.5, y: 0, opacity: 0 })
-      .to(empreintePas, { duration: 0.5, y: -10, opacity: 1 });
-/*const carteContainer = document.getElementById('carte-container');
+// Diviser le texte en caractères individuels
+let letters = letterText.innerText.split("");
+letterText.innerText = ""; // Réinitialiser le texte du conteneur
 
-// Créer un tableau pour stocker les empreintes de pas
-const empreintes = [];
+// Créer un span pour chaque lettre
+letters.forEach(function(letter) {
+    let span = document.createElement("span");
+    span.className = "letter";
+    span.innerText = letter;
+    letterText.appendChild(span);
+});
 
-// Fonction pour créer une nouvelle empreinte de pas
-function creerEmpreinte() {
-  const empreinte = document.createElement('img');
-  empreinte.src = 'asset/img/footprint-svgrepo-com (1).svg';
-  empreinte.classList.add('empreinte');
-  carteContainer.appendChild(empreinte);
-  return empreinte;
-}
-
-// Fonction pour animer une empreinte de pas
-function animerEmpreinte(empreinte) {
-  gsap.fromTo(
-    empreinte,
-    { opacity: 0, scale: 0 }, // État initial de l'empreinte (invisible et échelle à 0)
-    { duration: 1, opacity: 0, scale: 0.02, ease: 'back.out(1.7)' } // État final de l'empreinte (visible et échelle à 1)
-  );
-}
-
-// Boucle pour créer et animer les empreintes de pas successives
-for (let i = 0; i < 5; i++) { // Modifier le nombre d'empreintes de pas souhaitées (5 dans cet exemple)
-  const empreinte = creerEmpreinte();
-  empreintes.push(empreinte);
-  gsap.delayedCall(i * 0.5, animerEmpreinte, [empreinte]); // Délai d'apparition entre chaque empreinte de pas (0.5 secondes dans cet exemple)
-}*/
+// Animation de la lettre d'admission à Poudlard
+let letterSpans = document.getElementsByClassName("letter");
+timeline.to(letterSpans, {
+    opacity: 1,
+    duration: 0.5,
+    stagger: 0.1,
+    ease: "power2.inOut",
+    onComplete: function() {
+    // Animer les lettres pour qu'elles s'alignent et se mettent en place
+        timeline.to(letterSpans, {
+            x: "random(-50, 50)",
+            y: "random(-50, 50)",
+            rotation: "random(-360, 360)",
+            stagger: {
+                from: "random",
+                amount: 0.5
+            },
+            duration: 1,
+            ease: "power2.inOut",
+            onComplete: function() {
+                timeline.to(letterSpans, {
+                    x: 0,
+                    y: 0,
+                    rotation: 0,
+                    stagger: 0.05,
+                    duration: 0.5,
+                    ease: "power2.inOut"
+                });
+            }
+        });
+    }
+});
