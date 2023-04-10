@@ -1,15 +1,15 @@
-// Configuration de GSAP
-// Création d'une timeline pour l'animation
+// Init
 let timeline = gsap.timeline();
-
-// Définition de l'élément cible pour l'animation
 let letterText = document.getElementById("letter-text");
 
-// Diviser le texte en caractères individuels
+// Splitter
+/*let letters = letterText.innerText.split("");
+letterText.innerText = ""; */
 let letters = letterText.innerText.split("");
-letterText.innerText = ""; // Réinitialiser le texte du conteneur
+letterText.innerHTML = letters.map(
+    letter => letter === " " ? "&nbsp;" : (letter === "\n" ? "<br>" : `<span class="letter">${letter}</span>`)
+    ).join("");
 
-// Créer un span pour chaque lettre
 letters.forEach(function(letter) {
     let span = document.createElement("span");
     span.className = "letter";
@@ -17,35 +17,37 @@ letters.forEach(function(letter) {
     letterText.appendChild(span);
 });
 
-// Animation de la lettre d'admission à Poudlard
-let letterSpans = document.getElementsByClassName("letter");
-timeline.to(letterSpans, {
-    opacity: 1,
-    duration: 0.5,
-    stagger: 0.1,
-    ease: "power2.inOut",
-    onComplete: function() {
-    // Animer les lettres pour qu'elles s'alignent et se mettent en place
-        timeline.to(letterSpans, {
-            x: "random(-50, 50)",
-            y: "random(-50, 50)",
-            rotation: "random(-360, 360)",
-            stagger: {
-                from: "random",
-                amount: 0.5
-            },
-            duration: 1,
-            ease: "power2.inOut",
-            onComplete: function() {
-                timeline.to(letterSpans, {
-                    x: 0,
-                    y: 0,
-                    rotation: 0,
-                    stagger: 0.05,
-                    duration: 0.5,
-                    ease: "power2.inOut"
-                });
-            }
-        });
+// Animation 
+let letterSpans = document.querySelectorAll(".letter");
+
+
+timeline.fromTo(letterSpans, 
+    {
+        opacity: 0,
+        scale: 0,
+        rotation: function(index, target) {
+            return gsap.utils.random(-90, 90); 
+        },
+        x: function(index, target) {
+            return gsap.utils.random(-400, 400); 
+        },
+        y: function(index, target) {
+            return gsap.utils.random(-400, 400); 
+        },
+        fontSize: "50px"
+    },
+    {
+        opacity: 1,
+        scale: 1,
+        rotation: 0,
+        x: 0,
+        y: 0,
+        duration: 0.1,
+        stagger: 0.1,
+        ease: "power2.inOut",
+        fontSize: "32px"
     }
-});
+);
+
+
+

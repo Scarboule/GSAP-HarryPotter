@@ -15,11 +15,16 @@
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+    overflow: hidden;
   }
   
   /* Style pour le texte de la lettre */
   #letter-text {
-    font-size: 24px;
+    
+    width: 80%;
+    height: 80%;
+    font-size: 32px;
+    line-height: 50px;
     font-family: Arial, sans-serif;
     color: #000000;
     
@@ -29,6 +34,7 @@
     transform: translate(-50%, -50%);
   }
   .letter{
-    opacity: 0;
+  display: inline-block;
+  white-space: pre;
   }
   
