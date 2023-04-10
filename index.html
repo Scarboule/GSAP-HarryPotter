@@ -1,12 +1,81 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
+    <div id="carte-container">
+        <img id="carte" src="asset/img/carte-du-marauders-complete-01.png" alt="Carte de Poudlard">
+        <img id="empreinte" src="asset/img/footprint-svgrepo-com (1).svg" alt="Empreinte de pas">
+      </div>
     
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+  <style>
+    body{
+        width: 600px;
+        height: 600px;
+    }
+    #footprint-container{
+        height: 100%;
+        width: 100%;
+    }
+    .footprint {
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="footprints-container"></div>
+
+  <script>
+    // Sélectionnez le conteneur pour les empreintes de pas
+    const footprintsContainer = document.getElementById('footprints-container');
+
+    // Définissez l'animation GSAP
+    const tl = gsap.timeline();
+
+    // Utilisez GSAP pour créer une séquence d'empreintes de pas
+    
+
+    // Ajoutez des empreintes de pas au conteneur
+    for (let i = 0; i < 5; i++) {
+      const footprint = document.createElement('svg');
+      footprint.classList.add('footprint');
+      footprint.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      footprint.setAttribute('width', '50px');
+      footprint.setAttribute('height', '50px');
+      footprint.setAttribute('viewBox', '0 0 50px 50px');
+      // Ajoutez votre code SVG d'empreinte de pas ici
+    
+      footprintsContainer.appendChild(footprint);
+      const path =document.createElement("path");
+      path.classList.add("footpath");
+      path.setAttribute('id', "footpath");
+      footprint.appendChild(path)
+    }
+    tl.fromTo(footprintsContainer, { opacity: 0 }, { opacity: 1 })
+      .staggerFromTo('.footprint', 0.5, { y: 50, opacity: 0 }, { y: 50, opacity: 1 }, 0.2);
+      
+let footpath = document.getElementsByClassName("footpath");
+
+// Define the data for the empreinte de pas
+let footprintData = "M22.675 24.025c-4.098 0-7.413-3.315-7.413-7.413 0-4.097 3.315-7.413 7.413-7.413s7.413 3.316 7.413 7.413c0 4.098-3.315 7.413-7.413 7.413zm0-12.387c-2.432 0-4.413 1.981-4.413 4.413 0 2.432 1.981 4.413 4.413 4.413s4.413-1.981 4.413-4.413c0-2.432-1.981-4.413-4.413-4.413zM9.988 22.677c-.305 0-.603-.035-.897-.1l-4.09 3.493c.327.38.718.697 1.149.927l3.323-4.019c.18-.088.356-.19.523-.312l-3.008-1.802c.182-.33.401-.627.647-.895l3.438 1.6c.27-.15.552-.275.845-.37l-2.51-3.61c.45-.31.957-.554 1.499-.722l1.563 3.708c.335-.13.676-.244 1.026-.342l-1.03-3.49c.74-.139 1.495-.216 2.268-.216.773 0 1.527.077 2.267.216l-1.03 3.49c.35.098.691.212 1.026.342l1.563-3.708c.542.168 1.049.412 1.499.722l-2.51 3.61c.293.095.575.22.845.37l3.437-1.6c.245.268.466.565.648.895l-3.007 1.802c.167.122.343.224.524.312l3.322 4.019c.431-.23.823-.547 1.15-.927l-4.09-3.493c-.295.064-.594.1-.898.1-1.72 0-3.228-1.018-3.933-2.487-.704 1.469-2.213 2.487-3.933 2.487z";
+
+// Update the d attribute of the SVG path element with the empreinte de pas data
+gsap.set(footpath, {attr: {d: footprintData}});
+  </script>
 </body>
 </html>

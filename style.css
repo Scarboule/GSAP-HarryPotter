@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+html, body{
+    width: 614px;
+}
+
+#carte-container {
+    position: relative;
+    height: 100vh; 
+  }
+#carte{
+    height: 100vh;
+
+}
+#empreinte{
+    position: relative;
+    height: 2%;
+}
